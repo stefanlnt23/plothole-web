@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseServer } from "@/lib/supabase";
 import { parseJSON } from "@/lib/utils";
 import { ClauseCard, MissingProtectionCard } from "@/app/components/Cards";
 import { RiskScoreMeter } from "@/app/components/RiskScoreMeter";
@@ -7,7 +7,7 @@ import { VerdictBadge } from "@/app/components/Badges";
 import { PrintButton } from "@/app/components/PrintButton";
 
 export default async function ReportPage({ params }: { params: { id: string } }) {
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseServer();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/auth");
 

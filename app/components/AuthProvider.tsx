@@ -1,13 +1,13 @@
 "use client";
 
 import { createContext, useContext, useMemo } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { createSupabaseBrowser } from "@/lib/supabase";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 const AuthContext = createContext<SupabaseClient | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const client = useMemo(() => createSupabaseBrowserClient(), []);
+  const client = useMemo(() => createSupabaseBrowser(), []);
   return <AuthContext.Provider value={client}>{children}</AuthContext.Provider>;
 }
 
